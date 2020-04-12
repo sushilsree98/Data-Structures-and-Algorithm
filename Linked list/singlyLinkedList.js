@@ -38,12 +38,36 @@ class singlyLinkedList{
     this.length--;
     return this;
   }
+
+  shift(){
+    if(this.head==null) return undefined
+    let temp=this.head
+    this.head = temp.next;
+    this.length--;
+    if(this.length == 0){
+      this.tail=null;
+    }
+    return temp;
+  }
+
+  unshift(val){
+    let value = new Node(val);
+    if(!this.head){
+      this.head=value;
+      this.tail=this.head;
+    }else{
+      value.next=this.head;
+      this.head=value;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 let list = new singlyLinkedList();
 list.push("Sushil");
-list.push("Akshaya");
-list.push("Akku");
-list.push("Gayathri");
-list.pop()
+list.push("John");
+list.push("Doe");
+list.unshift("hello");
+
 console.log(list);
