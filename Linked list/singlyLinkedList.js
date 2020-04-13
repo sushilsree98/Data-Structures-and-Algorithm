@@ -9,11 +9,11 @@ class singlyLinkedList{
   constructor(){
     this.head=null;
     this.tail=null;
-    this.length=0
+    this.length=0;
   }
 
   push(val){
-    let newNode = new Node(val)
+    let newNode = new Node(val);
     if(!this.head){
       this.head = newNode;
       this.tail = this.head;
@@ -33,41 +33,64 @@ class singlyLinkedList{
       newTail = current;
       current = current.next;
     }
-    this.tail=newTail;
-    this.tail.next=null;
+    this.tail = newTail;
+    this.tail.next = null;
     this.length--;
-    return this;
-  }
-
-  shift(){
-    if(this.head==null) return undefined
-    let temp=this.head
-    this.head = temp.next;
-    this.length--;
-    if(this.length == 0){
+    if(this.length==0){
+      this.head=null;
       this.tail=null;
     }
-    return temp;
+    return current;
+  }
+
+
+  shift(){
+    if(!this.head) return undefined;
+    let current = this.head;
+    this.head=current.next;
+    this.length--;
+    if(this.length==0){
+      this.tail=null;
+    }
+    return current;
   }
 
   unshift(val){
-    let value = new Node(val);
+    let newNode = new Node(val);
     if(!this.head){
-      this.head=value;
+      this.head=newNode;
       this.tail=this.head;
     }else{
-      value.next=this.head;
-      this.head=value;
+      newNode.next = this.head;
+      this.head = newNode;
     }
     this.length++;
     return this;
+  }
+
+  get(index){
+    if(index < 0 || index >= this.length) return null;
+    let counter = 0;
+    let current = this.head;
+    while(counter !== index){
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+
+  set(value,index){
+    let foundNode = this.get(index)
+    if(foundNode){
+        foundNode.val = value;
+        return true;
+    }
+    return false;
   }
 }
 
 let list = new singlyLinkedList();
 list.push("Sushil");
-list.push("John");
-list.push("Doe");
-list.unshift("hello");
-
-console.log(list);
+list.push("John Doe");
+list.unshift("Hello");
+console.log(list.set("HI",1),list);
