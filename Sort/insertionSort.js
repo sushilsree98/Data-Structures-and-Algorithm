@@ -1,5 +1,5 @@
 let ar=[1,25,3,2,8,5,9];
-for(let i=0;i<ar.length;i++){
+for(let i=1;i<ar.length;i++){
   let val=ar[i];
   let j=i-1;
   while(j>=0 && ar[j]>val){

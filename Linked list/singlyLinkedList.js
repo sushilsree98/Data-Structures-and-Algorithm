@@ -91,6 +91,6 @@ class singlyLinkedList{
 
 let list = new singlyLinkedList();
 list.push("Sushil");
-list.push("John Doe");
+list.push("John Doe");g
 list.unshift("Hello");
 console.log(list.set("HI",1),list);
