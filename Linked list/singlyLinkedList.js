@@ -87,10 +87,58 @@ class singlyLinkedList{
     }
     return false;
   }
+
+  insert(index,value){
+    if(index < 0 && index > this.length) return null;
+    if(index  == 0) return !!this.unshift(value);
+    if(index == this.length) return !!this.push(value);
+    let newNode = new Node(value);
+    let prev = this.get(index-1);
+    let temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true
+  }
+
+  remove(index){
+    if(index < 0 || index > this.length) return null;
+    if(index == 0) return this.shift();
+    if(index == this.length) return this.pop();
+    let prev = this.get(index-1);
+    let current = prev.next;
+    prev.next = current.next;
+    this.length--;
+    return current;
+  }
+
+  reverse(){
+    if(!this.head) return undefined;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let nextValue;
+    let prevValue = null;
+    for(let i=0; i < this.length; i++){
+      nextValue = node.next;
+      node.next = prevValue;
+      prevValue = node;
+      node = nextValue;
+    }
+    return this;
+  }
+
 }
 
 let list = new singlyLinkedList();
 list.push("Sushil");
-list.push("John Doe");
 list.unshift("Hello");
-console.log(list.set("HI",1),list);
+list.push("John Doe");
+// list.insert(1,"World");
+// list.remove(4);
+list = list.reverse();
+while(list.head.next){
+  console.log(list.head.val);
+  list.head = list.head.next;
+}
+console.log(list.head.val);
