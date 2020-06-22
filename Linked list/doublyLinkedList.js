@@ -101,6 +101,36 @@ class DoublyLinkedList {
   }
   return false;
   }
+
+  insert(index,val){
+    if(index < 0 || index > this.length) return undefined;
+    if(index == 0) return this.unshift(val);
+    if(index == this.length) return this.push(val);
+    let newNode = new Node(val);
+    let previousNode = this.get(index-1);
+    let nextNode = previousNode.next;
+    newNode.prev = previousNode;
+    previousNode.next = newNode;
+    newNode.next = nextNode;
+    nextNode.prev = newNode;
+    this.length++;
+    return true;
+  }
+
+  remove(index){
+    if(index < 0 || index > this.length) return undefined;
+    if(index == 0) return !!this.shift();
+    if(index == this.length-1) return !!this.pop();
+    let currentNode = this.get(index);
+    let prevNode = currentNode.prev;
+    let nextNode = currentNode.next;
+    prevNode.next = nextNode;
+    nextNode.prev = prevNode;
+    currentNode.next = null;
+    currentNode.prev = null;
+    this.length--;
+    return true
+  }
 }
 
 
@@ -110,6 +140,7 @@ cs.push(12);
 cs.push(13);
 cs.push(14);
 cs.unshift(11);
-
-console.log(cs.set(2,"new value"));
-console.log(cs.get(2));
+cs.insert(1,"Sushil")
+cs.remove(1)
+// console.log(cs.set(2,"new value"));
+console.log(cs);
