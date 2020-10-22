@@ -71,7 +71,18 @@ class BinarySearchTree {
         }
        return data;
   }
-  
+
+  DFSPreOrder() {
+    let data = []
+    function traverse(node) {
+        data.push(node.value);
+        if(node.left) traverse(node.left)
+        if(node.right) traverse(node.right)
+    }
+    traverse(this.root);
+    return data
+  }
+
 }
     //     10
     //   5     15
@@ -85,4 +96,5 @@ tree.insert(7)
 tree.insert(12)
 tree.insert(17)
 tree.find(8)
-console.log(tree.BFS());
+tree.BFS()
+console.log(tree.DFSPreOrder());
