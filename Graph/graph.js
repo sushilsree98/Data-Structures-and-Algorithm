@@ -10,10 +10,10 @@ class Graph{
 
     addEdge(vertex1, vertex2){
         if (this.adjacencyList[vertex2]) {
-            this.adjacencyList[vertex2].push(vertex1)
+            this.adjacencyList[vertex2].push(vertex1);
         }
         if (this.adjacencyList[vertex1]) {
-            this.adjacencyList[vertex1].push(vertex2)
+            this.adjacencyList[vertex1].push(vertex2);
         }
     }
 
@@ -28,11 +28,36 @@ class Graph{
         })
         delete this.adjacencyList[vertex]
     }
+
+    DFSRecursive(start){
+        const result = [];
+        const visited = {};
+        const adjacencyList = this.adjacencyList;
+        (function dfs(vertex){
+            if(!vertex) return null;
+            visited[vertex] = true
+            result.push(vertex)
+            adjacencyList[vertex].forEach(neighbor => {
+                if(!visited[neighbor]){
+                    dfs(neighbor)
+                }
+            });
+        })(start)
+        return result;
+    }
 }
 
 let G = new Graph()
-G.addVertex('Tokyo')
-G.addVertex("Dallas")
-G.addVertex("Aspen")
-G.addEdge("Dallas", "Tokyo")
-G.addEdge("Dallas", "Aspen")
+G.addVertex('A')
+G.addVertex("B")
+G.addVertex("C")
+G.addVertex("D")
+G.addVertex("E")
+G.addVertex("F")
+G.addEdge("A", "B")
+G.addEdge("A", "C")
+G.addEdge("B", "D")
+G.addEdge("C", "E")
+G.addEdge("D", "E")
+G.addEdge("D", "F")
+G.addEdge("E", "F")
